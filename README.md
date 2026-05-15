@@ -60,7 +60,7 @@ cd client
 npm run dev
 ```
 
-The app expects the API at `http://localhost:5000/api`.
+The app expects the API at `https://binary-automates-api.onrender.com`.
 
 ## API overview
 
