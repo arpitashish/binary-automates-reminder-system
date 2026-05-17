@@ -1,136 +1,283 @@
-# Mini Payment Reminder SaaS
+# Binary Automates Reminder System
 
-A polished mini payment reminder system for small businesses. It lets you create invoices, track payment status, send real reminder emails through Resend, and monitor activity from a dashboard that feels closer to a real SaaS product than a demo.
+A modern full-stack payment reminder SaaS application built for small businesses to manage invoices, track overdue payments, and send automated reminder emails.
 
-## What is included
+## Live Demo
 
-- Invoice CRUD
-- Auto overdue detection
-- Search, filters, and sorting
-- Reminder sending with Resend
-- Activity log and reminder history
-- Dashboard metrics and paid/unpaid analytics
-- Responsive SaaS-style UI
-- SQLite backend
-- Deployment notes for Render and Vercel
+Frontend: [https://binary-automates-reminder-system-cl-wheat.vercel.app](https://binary-automates-reminder-system-cl-wheat.vercel.app)
 
-## Folder structure
+Backend API: [https://binary-automates-api.onrender.com](https://binary-automates-api.onrender.com)
 
-```txt
-client/
-server/
-```
+---
 
-## Tech stack
+# Features
 
-Frontend: React, Vite, Tailwind CSS, React Router, Axios, React Hot Toast, Lucide React, Recharts  
-Backend: Node.js, Express, SQLite, Resend
+* Create, update, and manage invoices
+* Track paid, pending, and overdue invoices
+* Real-time dashboard analytics
+* Activity timeline for invoice actions
+* Responsive modern UI built with React + Tailwind CSS
+* SQLite database integration
+* REST API backend using Express.js
+* Full-stack deployment on Vercel and Render
 
-## Setup
+---
 
-### 1) Install dependencies
+# Tech Stack
 
-```bash
-cd server
-npm install
+## Frontend
 
-cd ../client
-npm install
-```
+* React.js
+* Vite
+* Tailwind CSS
+* Axios
+* React Router
 
-### 2) Configure environment variables
 
-Copy `.env.example` to `.env` in the project root or inside `server/` depending on your deployment setup. Use real values for:
+## Backend
 
-- `RESEND_API_KEY`
-- `EMAIL_FROM`
-- `CLIENT_URL`
-
-### 3) Run the backend
-
-```bash
-cd server
-npm run dev
-```
-
-### 4) Run the frontend
-
-```bash
-cd client
-npm run dev
-```
-
-The app expects the API at `https://binary-automates-api.onrender.com`.
-
-## API overview
-
-- `GET /api/dashboard`
-- `GET /api/invoices`
-- `POST /api/invoices`
-- `GET /api/invoices/:id`
-- `PUT /api/invoices/:id`
-- `DELETE /api/invoices/:id`
-- `POST /api/invoices/:id/mark-paid`
-- `POST /api/invoices/:id/remind`
-- `GET /api/activity`
-
-## Database
-
-The SQLite schema lives in `server/src/db/schema.sql`.  
-Tables:
-
-- `invoices`
-- `activity_logs`
+* Node.js
+* Express.js
+* SQLite
+* Better-SQLite3
+* Resend Email API
+* Nodemon
 
 ## Deployment
 
-### Backend on Render
+* Vercel (Frontend)
+* Render (Backend)
 
-1. Create a new Web Service.
-2. Set build command: `npm install`
-3. Set start command: `npm start`
-4. Add env vars from `.env.example`
-5. Ensure the SQLite file path is writable. For production, use persistent disk or swap to hosted Postgres if required.
+---
 
-### Frontend on Vercel
+# Project Structure
 
-1. Create a new project from the `client/` folder.
-2. Set `VITE_API_BASE_URL` to your Render backend URL.
-3. Deploy.
+```bash
+payment-reminder-saas/
+│
+├── client/          # Frontend React application
+├── server/          # Backend Express server
+├── package.json
+└── README.md
+```
 
-## Tradeoffs
+---
 
-- SQLite keeps the take-home simple and fast to run.
-- Reminder sending is synchronous for clarity.
-- Live updates are handled through periodic refresh rather than websockets.
-- Authentication is intentionally omitted to keep the scope focused on invoice/reminder workflow.
+# Installation
 
-## Future improvements
+## Clone Repository
 
-- Authentication and multi-tenant workspaces
-- Websocket live updates
-- CSV import/export
-- Scheduled reminders
-- Role-based permissions
-- Better analytics and revenue forecasting
+```bash
+git clone https://github.com/arpitashish/binary-automates-reminder-system.git
+```
 
-## Interview talking points
+```bash
+cd binary-automates-reminder-system
+```
 
-- The dashboard aggregates invoice state into business metrics.
-- Reminder history creates a trustable audit trail.
-- Overdue logic is derived from due dates so the app stays consistent.
-- SQLite was chosen to make setup frictionless for a take-home assignment.
-- The frontend is organized into reusable components to keep the UI maintainable.
+---
 
-## Screenshots
+# Backend Setup
 
-Add screenshots here after running the app locally and capturing the dashboard, invoices table, invoice modal, and reminder activity timeline.
-
-## Sample data
-
-Run the seed script:
+## Move to server folder
 
 ```bash
 cd server
-npm run seed
 ```
+
+## Install dependencies
+
+```bash
+npm install
+```
+
+## Create .env file
+
+```env
+PORT=5000
+DATABASE_PATH=./src/db/app.sqlite
+RESEND_API_KEY=your_resend_api_key
+EMAIL_FROM=onboarding@resend.dev
+CLIENT_URL=http://localhost:5173
+NODE_ENV=development
+```
+
+## Start backend
+
+```bash
+npm run dev
+```
+
+Backend runs on:
+
+```bash
+http://localhost:5000
+```
+
+---
+
+# Frontend Setup
+
+## Move to client folder
+
+```bash
+cd client
+```
+
+## Install dependencies
+
+```bash
+npm install
+```
+
+## Start frontend
+
+```bash
+npm run dev
+```
+
+Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+# API Endpoints
+
+## Invoice Routes
+
+| Method | Endpoint                 | Description         |
+| ------ | ------------------------ | ------------------- |
+| GET    | /api/invoices            | Get all invoices    |
+| POST   | /api/invoices            | Create invoice      |
+| PUT    | /api/invoices/:id        | Update invoice      |
+| DELETE | /api/invoices/:id        | Delete invoice      |
+| POST   | /api/invoices/:id/remind | Send reminder email |
+
+## Dashboard Routes
+
+| Method | Endpoint       |
+| ------ | -------------- |
+| GET    | /api/dashboard |
+
+## Activity Routes
+
+| Method | Endpoint      |
+| ------ | ------------- |
+| GET    | /api/activity |
+
+---
+
+# Email Reminder System
+
+The project integrates Resend API for sending reminder emails.
+
+## Example Reminder Flow
+
+1. Create invoice
+2. Invoice becomes overdue
+3. Click "Send Reminder"
+4. Email sent to client
+5. Activity logged in dashboard
+
+---
+
+# Dashboard Analytics
+
+The dashboard includes:
+
+* Total invoices
+* Paid invoices
+* Pending invoices
+* Overdue invoices
+* Collection health tracking
+* Revenue analytics chart
+* Recent activity timeline
+
+---
+
+# Deployment
+
+## Frontend Deployment (Vercel)
+
+```bash
+Root Directory: client
+Build Command: npm run build
+Output Directory: dist
+```
+
+Environment Variable:
+
+```env
+VITE_API_BASE_URL=https://binary-automates-api.onrender.com/api
+```
+
+---
+
+## Backend Deployment (Render)
+
+```bash
+Root Directory: server
+Build Command: npm install
+Start Command: npm start
+```
+
+Environment Variables:
+
+```env
+PORT=10000
+DATABASE_PATH=./src/db/app.sqlite
+RESEND_API_KEY=your_resend_api_key
+EMAIL_FROM=onboarding@resend.dev
+CLIENT_URL=https://your-vercel-url.vercel.app
+NODE_ENV=production
+```
+
+---
+
+# Screenshots
+
+## Dashboard
+
+<img width="1919" height="924" alt="image" src="https://github.com/user-attachments/assets/4a1228fb-fb5c-4a47-94b9-11204d60fa46" />
+
+
+## Invoice Management
+
+<img width="1907" height="674" alt="image" src="https://github.com/user-attachments/assets/2884de44-de30-4758-8211-9ac1ec55625b" />
+
+## Reminder Email System
+
+<img width="1095" height="774" alt="image" src="https://github.com/user-attachments/assets/72c416f6-b55d-4911-b873-da72d831284b" />
+
+## Analytics Section
+<img width="1909" height="917" alt="image" src="https://github.com/user-attachments/assets/6f97a7e2-ca66-448a-b8d7-faf091d3e91f" />
+
+
+
+
+---
+
+# Challenges Faced
+
+* SQLite deployment issues
+* CORS configuration in production
+* Tailwind + Vite compatibility issues
+* Vercel deployment configuration
+* Email sandbox restrictions
+
+---
+
+
+
+# Author
+
+Arpit Ashish Raj
+
+GitHub: [https://github.com/arpitashish](https://github.com/arpitashish)
+
+---
+
+
