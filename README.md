@@ -227,12 +227,15 @@ Start Command: npm start
 Environment Variables:
 
 ```env
-PORT=10000
+
+PORT=5000
 DATABASE_PATH=./src/db/app.sqlite
-RESEND_API_KEY=your_resend_api_key
+RESEND_API_KEY=re_NRJfGS97_LhMzQ2QqztZTxsuwpEGXZTqH
 EMAIL_FROM=onboarding@resend.dev
-CLIENT_URL=https://your-vercel-url.vercel.app
-NODE_ENV=production
+CLIENT_URL=https://binary-automates-reminder-system-cl-wheat.vercel.app
+NODE_ENV=development
+
+
 ```
 
 ---
