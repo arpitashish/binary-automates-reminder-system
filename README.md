@@ -6,7 +6,7 @@ A modern full-stack payment reminder SaaS application built for small businesses
 
 Frontend: [https://binary-automates-reminder-system-cl-wheat.vercel.app](https://binary-automates-reminder-system-cl-wheat.vercel.app)
 
-Backend API: [https://binary-automates-api.onrender.com](https://binary-automates-api.onrender.com)
+
 
 ---
 
